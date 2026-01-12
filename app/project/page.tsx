@@ -21,26 +21,23 @@ export default function ProjectPage() {
       </nav>
 
       {/* Section 1: Our Ongoing Projects */}
-      <section className="bg-black text-white py-24 px-4 text-center">
+      <section className="bg-white text-gray-900 py-16 px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">
-          <span className="text-orange-500">Our</span> <span className="text-indigo-500">Ongoing Projects</span>
+          <span className="text-orange-600">Our</span> <span className="text-blue-900">Ongoing Projects</span>
         </h1>
-        {/* Decorative underline placeholder */}
-        <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-indigo-500 mx-auto mb-8 rounded-full"></div>
 
-        <p className="max-w-4xl mx-auto text-gray-400 text-lg leading-relaxed mb-16">
+        <p className="max-w-4xl mx-auto text-gray-600 text-lg leading-relaxed mb-16">
           Discover premium residential plots that promise exceptional value, strategic locations, and high-growth potential. Explore our latest developments, where quality meets affordability.
         </p>
 
-        {/* Building Image Placeholder */}
-        <div className="max-w-2xl mx-auto h-[400px] bg-gray-900 border border-gray-800 rounded-lg flex items-center justify-center relative overflow-hidden group">
+        {/* Building Image */}
+        <div className="max-w-4xl mx-auto h-[500px] relative overflow-hidden group rounded-lg">
           <Image
             src="/asset/img/image (1).jpg"
             alt="Ongoing Projects"
             fill
-            className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+            className="object-contain"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
         </div>
       </section>
 
@@ -94,7 +91,7 @@ export default function ProjectPage() {
                 Step into a world of affordability, comfort, and growth with Karun Garden, a premium residential plot development nestled in the picturesque Kinathukadavu area, just 3 km off the Pollachi-Coimbatore Highway. Priced from 3.5 Lakhs per Cent, Karun Garden offers the perfect investment opportunity with ready-to-move plots that save you from construction delays, unlike many under-construction developments in the area.
               </p>
               <p>
-                Whether you're a first-time buyer or an investor, Karun Garden provides exceptional value with its Vastu-compliant plots and high-quality infrastructure.
+                Whether you are a first-time buyer or an investor, Karun Garden provides exceptional value with its Vastu-compliant plots and high-quality infrastructure.
               </p>
             </div>
           </div>
