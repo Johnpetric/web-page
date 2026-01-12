@@ -136,11 +136,11 @@ export default function ProjectPage() {
       {/* Section 5: Why Karun Garden is the Smart Choice */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">
+          <h2 className="text-2xl md:text-3xl font-normal text-center mb-12 text-[#071C1F]">
             Why Karun Garden is the Smart Choice
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="flex flex-wrap justify-center gap-6">
             {[
               {
                 title: "Affordable Pricing:",
@@ -163,10 +163,10 @@ export default function ProjectPage() {
                 icon: "📈"
               }
             ].map((feature, idx) => (
-              <div key={idx} className="bg-white p-8 border border-red-50 rounded-none shadow-none hover:shadow-lg transition-shadow">
-                <div className="text-4xl mb-6 text-orange-600">{feature.icon}</div>
-                <h3 className="text-lg font-bold text-orange-500 mb-4">{feature.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{feature.desc}</p>
+              <div key={idx} className="w-[280px] h-[280px] bg-white border border-[#FF5A3C]/10 flex flex-col items-center justify-center p-6 text-center hover:shadow-lg transition-shadow">
+                <div className="w-[52px] h-[52px] mb-6 text-4xl flex items-center justify-center text-[#FF5A3C]">{feature.icon}</div>
+                <h3 className="text-[20px] leading-[30px] font-semibold text-[#FF5A3C] mb-2">{feature.title}</h3>
+                <p className="text-[14px] leading-[24px] text-[#7B7B7B]">{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -266,11 +266,11 @@ export default function ProjectPage() {
       {/* Section 9: Why Choose Naval Nagar? */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">
+          <h2 className="text-2xl md:text-3xl font-normal text-center mb-12 text-[#071C1F]">
             Why Choose Naval Nagar?
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="flex flex-wrap justify-center gap-6">
             {[
               {
                 title: "Exclusive Pricing:",
@@ -293,10 +293,10 @@ export default function ProjectPage() {
                 icon: "📈"
               }
             ].map((feature, idx) => (
-              <div key={idx} className="bg-white p-8 border border-red-50 rounded-none shadow-none hover:shadow-lg transition-shadow">
-                <div className="text-4xl mb-6 text-orange-600">{feature.icon}</div>
-                <h3 className="text-lg font-bold text-orange-500 mb-4">{feature.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{feature.desc}</p>
+              <div key={idx} className="w-[280px] h-[280px] bg-white border border-[#FF5A3C]/10 flex flex-col items-center justify-center p-6 text-center hover:shadow-lg transition-shadow">
+                <div className="w-[52px] h-[52px] mb-6 text-4xl flex items-center justify-center text-[#FF5A3C]">{feature.icon}</div>
+                <h3 className="text-[20px] leading-[30px] font-semibold text-[#FF5A3C] mb-2">{feature.title}</h3>
+                <p className="text-[14px] leading-[24px] text-[#7B7B7B]">{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -396,11 +396,11 @@ export default function ProjectPage() {
       {/* Section 13: Why Sree Virutcham Nagar Stands Out */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-16 text-gray-900">
+          <h2 className="text-2xl md:text-3xl font-normal text-center mb-12 text-[#071C1F]">
             Why Sree Virutcham Nagar Stands Out:
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="flex flex-wrap justify-center gap-6">
             {[
               {
                 title: "Incredible Value:",
@@ -423,10 +423,10 @@ export default function ProjectPage() {
                 icon: "📈"
               }
             ].map((feature, idx) => (
-              <div key={idx} className="bg-white p-8 border border-red-50 rounded-none shadow-none hover:shadow-lg transition-shadow">
-                <div className="text-4xl mb-6 text-orange-600">{feature.icon}</div>
-                <h3 className="text-lg font-bold text-orange-500 mb-4">{feature.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{feature.desc}</p>
+              <div key={idx} className="w-[280px] h-[280px] bg-white border border-[#FF5A3C]/10 flex flex-col items-center justify-center p-6 text-center hover:shadow-lg transition-shadow">
+                <div className="w-[52px] h-[52px] mb-6 text-4xl flex items-center justify-center text-[#FF5A3C]">{feature.icon}</div>
+                <h3 className="text-[20px] leading-[30px] font-semibold text-[#FF5A3C] mb-2">{feature.title}</h3>
+                <p className="text-[14px] leading-[24px] text-[#7B7B7B]">{feature.desc}</p>
               </div>
             ))}
           </div>
