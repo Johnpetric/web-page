@@ -52,14 +52,13 @@
     /* Brand Orange Glow */
 }
 
-/* Smooth Image Zoom */
-.group:hover .hover-zoom-img {
+/* Smooth Image Zoom - Disabled */
+/* .group:hover .hover-zoom-img {
     transform: scale(1.05);
 }
-
 .hover-zoom-img {
     transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+} */
 
 /* Staggered Animation Delays for Grid Items */
 /* Uses nth-child to create a ripple effect */
@@ -81,4 +80,24 @@
 
 .stagger-delay:nth-child(5) {
     transition-delay: 500ms;
+}
+
+/* Prevent image dragging on the project page */
+.fixed-page-bg img {
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+    /* Optional: completely ignore mouse events if no interaction needed, but might break clicks. explicit drag prevention is safer. */
+}
+
+/* Re-enable pointer events if needed for specific interactions, but simple drag prevention: */
+.fixed-page-bg img {
+    pointer-events: auto;
+    /* reset */
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
