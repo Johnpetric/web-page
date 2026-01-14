@@ -1,0 +1,84 @@
+/* Fixed Page Background Texture */
+.fixed-page-bg::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/asset/img/img 2.jpg');
+    /* Aerial view texture */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.08;
+    /* Very subtle */
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Premium Hover Effects --- */
+
+/* Smooth Card Lift & Glow */
+.hover-card {
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hover-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px -5px rgba(241, 91, 38, 0.15);
+    /* Brand Orange Glow */
+}
+
+/* Smooth Image Zoom */
+.group:hover .hover-zoom-img {
+    transform: scale(1.05);
+}
+
+.hover-zoom-img {
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Staggered Animation Delays for Grid Items */
+/* Uses nth-child to create a ripple effect */
+.stagger-delay:nth-child(1) {
+    transition-delay: 100ms;
+}
+
+.stagger-delay:nth-child(2) {
+    transition-delay: 200ms;
+}
+
+.stagger-delay:nth-child(3) {
+    transition-delay: 300ms;
+}
+
+.stagger-delay:nth-child(4) {
+    transition-delay: 400ms;
+}
+
+.stagger-delay:nth-child(5) {
+    transition-delay: 500ms;
+}
