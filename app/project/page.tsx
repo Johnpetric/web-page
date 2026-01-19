@@ -1,32 +1,42 @@
-import Link from "next/link";
+"use client";
+import { useEffect } from "react";
+import "./page.css";
 import Image from "next/image";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 export default function ProjectPage() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll(".animate-on-scroll");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans">
+    <div className="min-h-screen font-sans fixed-page-bg">
       {/* Navigation */}
-      <nav className="w-full max-w-7xl mx-auto flex items-center justify-between py-6 px-4 md:px-8">
-        <div className="text-2xl font-bold text-brand tracking-tighter">
-          VKV Realty <span className="text-gray-900 text-sm block">1985</span>
-        </div>
-        <div className="hidden md:flex items-center gap-8 font-medium text-gray-700">
-          <Link href="/home" className="hover:text-brand transition-colors">Home</Link>
-          <Link href="/about" className="hover:text-brand transition-colors">About</Link>
-          <Link href="/project" className="text-brand">Project</Link>
-          <Link href="/contact" className="hover:text-brand transition-colors">Contact</Link>
-        </div>
-        <button className="md:hidden text-gray-700">
-          ☰
-        </button>
-      </nav>
+      {/* Navigation */}
+      <Header />
 
       {/* Section 1: Our Ongoing Projects */}
-      <section className="bg-white text-gray-900 py-16 px-4 text-center">
+      <section className="bg-white text-gray-900 py-16 px-4 text-center animate-on-scroll">
         <h1 className="text-4xl md:text-5xl font-bold mb-6">
           <span className="text-orange-600">Our</span> <span className="text-blue-900">Ongoing Projects</span>
         </h1>
 
-        <p className="max-w-4xl mx-auto text-gray-600 text-lg leading-relaxed mb-16">
+        <p className="max-w-4xl mx-auto text-gray-600 text-lg leading-relaxed mb-2">
           Discover premium residential plots that promise exceptional value, strategic locations, and high-growth potential. Explore our latest developments, where quality meets affordability.
         </p>
 
@@ -36,13 +46,13 @@ export default function ProjectPage() {
             src="/asset/img/image (1).jpg"
             alt="Ongoing Projects"
             fill
-            className="object-contain"
+            className="object-contain hover-zoom-img"
           />
         </div>
       </section>
 
       {/* Section 2: Karun Garden Highlights */}
-      <section id="karun-garden" className="py-20 bg-white scroll-mt-20">
+      <section id="karun-garden" className="py-20 bg-white scroll-mt-20 animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-16 text-blue-900">
             <span className="text-orange-600">Karun Garden</span> – The Ideal Affordable Plot in the <br className="hidden md:block" /> Heart of Coimbatore
@@ -50,19 +60,19 @@ export default function ProjectPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-start">
             {[
-              { label: "Location", value: "Arasampalayam, Kinathukadavu, Coimbatore District, Tamil Nadu", icon: "📍" },
-              { label: "Starting Price", value: "₹ 3.5 Lakhs per Cent", icon: "💰" },
-              { label: "Land Area", value: "8.47 Acres", icon: "🗺️" },
-              { label: "Available Units", value: "42 Plots", icon: "📍" },
-              { label: "Development Stage", value: "Ready-to-Move", icon: "📈" },
+              { label: "Location", value: "Arasampalayam, Kinathukadavu, Coimbatore District, Tamil Nadu", icon: "/asset/icon/ic 1.png" },
+              { label: "Starting Price", value: "₹ 3.5 Lakhs per Cent", icon: "/asset/icon/ic 2.png" },
+              { label: "Land Area", value: "8.47 Acres", icon: "/asset/icon/ic 3.png" },
+              { label: "Available Units", value: "42 Plots", icon: "/asset/icon/ic 4.png" },
+              { label: "Development Stage", value: "Ready-to-Move", icon: "/asset/icon/ic 5.png" },
             ].map((item, index) => (
-              <div key={index} className="flex flex-col items-center">
-                {/* Icon Circle Placeholder - mimicking the gradient line icons in screenshot */}
-                <div className="w-16 h-16 mb-4 text-3xl flex items-center justify-center text-orange-600">
-                  {item.icon}
+              <div key={index} className="flex flex-col items-center stagger-delay animate-on-scroll bg-white border border-[#FF5A3C]/10 p-6 rounded-lg text-center hover:shadow-lg transition-shadow hover-card h-full justify-center">
+                {/* Icon Circle */}
+                <div className="w-16 h-16 mb-4 flex items-center justify-center relative">
+                  <Image src={item.icon} alt={item.label} width={40} height={40} className="object-contain" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{item.label}</h3>
-                <p className="text-sm text-gray-500 max-w-[180px] leading-snug">{item.value}</p>
+                <p className="text-sm text-gray-500 leading-snug">{item.value}</p>
               </div>
             ))}
           </div>
@@ -70,7 +80,7 @@ export default function ProjectPage() {
       </section>
 
       {/* Section 3: Discover Karun Garden */}
-      <section className="py-24 bg-[#2C2C6E] text-white">
+      <section className="py-24 bg-[#2C2C6E] text-white animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
           {/* Aerial Image Left */}
           <div className="w-full h-[500px] bg-white/5 rounded-sm border border-white/10 flex items-center justify-center relative overflow-hidden">
@@ -78,7 +88,7 @@ export default function ProjectPage() {
               src="/asset/img/img 2.jpg"
               alt="Karun Garden Aerial View"
               fill
-              className="object-cover"
+              className="object-cover hover-zoom-img"
             />
           </div>
 
@@ -99,7 +109,7 @@ export default function ProjectPage() {
       </section>
 
       {/* Section 4: Location */}
-      <section className="py-24 bg-white text-gray-900">
+      <section className="py-24 bg-white text-gray-900 animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-start">
           <div className="pt-8">
             <h2 className="text-3xl font-bold text-gray-800 mb-12">Unbeatable Location and Connectivity</h2>
@@ -127,14 +137,14 @@ export default function ProjectPage() {
               src="/asset/img/img 3.png"
               alt="Karun Garden Location Map"
               fill
-              className="object-cover"
+              className="object-cover hover-zoom-img"
             />
           </div>
         </div>
       </section>
 
       {/* Section 5: Why Karun Garden is the Smart Choice */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-normal text-center mb-12 text-[#071C1F]">
             Why Karun Garden is the Smart Choice
@@ -145,26 +155,28 @@ export default function ProjectPage() {
               {
                 title: "Affordable Pricing:",
                 desc: "Starting at just ₹3.5 Lakhs per Cent, the most competitive in the area.",
-                icon: "💰"
+                icon: "/asset/icon/ic 6.png"
               },
               {
                 title: "Immediate Possession:",
                 desc: "With our ready-to-move status, you can begin building without delay",
-                icon: "🏗️"
+                icon: "/asset/icon/ic 7.png"
               },
               {
                 title: "Excellent Infrastructure:",
                 desc: "Enjoy wide 30ft/23ft tar roads, water supply, drainage, and planned security features.",
-                icon: "🛣️"
+                icon: "/asset/icon/ic 8.png"
               },
               {
                 title: "High Appreciation Potential:",
                 desc: "With 7-8% annual appreciation, this is not just a plot, but a growing asset for the future.",
-                icon: "📈"
+                icon: "/asset/icon/ic 9.png"
               }
             ].map((feature, idx) => (
-              <div key={idx} className="w-[280px] h-[280px] bg-white border border-[#FF5A3C]/10 flex flex-col items-center justify-center p-6 text-center hover:shadow-lg transition-shadow">
-                <div className="w-[52px] h-[52px] mb-6 text-4xl flex items-center justify-center text-[#FF5A3C]">{feature.icon}</div>
+              <div key={idx} className="w-[280px] h-[280px] bg-white border border-[#FF5A3C]/10 flex flex-col items-center justify-center p-6 text-center hover:shadow-lg transition-shadow hover-card">
+                <div className="w-[52px] h-[52px] mb-6 flex items-center justify-center relative">
+                  <Image src={feature.icon} alt={feature.title} width={40} height={40} className="object-contain" />
+                </div>
                 <h3 className="text-[20px] leading-[30px] font-semibold text-[#FF5A3C] mb-2">{feature.title}</h3>
                 <p className="text-[14px] leading-[24px] text-[#7B7B7B]">{feature.desc}</p>
               </div>
@@ -174,7 +186,7 @@ export default function ProjectPage() {
       </section>
 
       {/* Section 6: Naval Nagar Highlights */}
-      <section id="naval-nagar" className="py-20 bg-white scroll-mt-20">
+      <section id="naval-nagar" className="py-20 bg-white scroll-mt-20 animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-16 text-blue-900">
             <span className="text-orange-600">Naval Nagar</span> – Luxury Meets Exclusivity
@@ -182,18 +194,18 @@ export default function ProjectPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-start">
             {[
-              { label: "Location", value: "Pollachi-Coimbatore Highway (NH83), Kinathukadavu, Coimbatore District, Tamil Nadu", icon: "📍" },
-              { label: "Starting Price", value: "₹ 11 Lakhs per Cent", icon: "💰" },
-              { label: "Land Area", value: "1 Acre", icon: "🗺️" },
-              { label: "Available Units", value: "20 Plots", icon: "📍" },
-              { label: "Development Stage", value: "Ready-to-Move", icon: "📈" },
+              { label: "Location", value: "Pollachi-Coimbatore Highway (NH83), Kinathukadavu, Coimbatore District, Tamil Nadu", icon: "/asset/icon/ic 1.png" },
+              { label: "Starting Price", value: "₹ 11 Lakhs per Cent", icon: "/asset/icon/ic 2.png" },
+              { label: "Land Area", value: "1 Acre", icon: "/asset/icon/ic 3.png" },
+              { label: "Available Units", value: "20 Plots", icon: "/asset/icon/ic 4.png" },
+              { label: "Development Stage", value: "Ready-to-Move", icon: "/asset/icon/ic 5.png" },
             ].map((item, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <div className="w-16 h-16 mb-4 text-3xl flex items-center justify-center text-orange-600">
-                  {item.icon}
+              <div key={index} className="flex flex-col items-center stagger-delay animate-on-scroll bg-white border border-[#FF5A3C]/10 p-6 rounded-lg text-center hover:shadow-lg transition-shadow hover-card h-full justify-center">
+                <div className="w-16 h-16 mb-4 flex items-center justify-center relative">
+                  <Image src={item.icon} alt={item.label} width={40} height={40} className="object-contain" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{item.label}</h3>
-                <p className="text-sm text-gray-500 max-w-[180px] leading-snug">{item.value}</p>
+                <p className="text-sm text-gray-500 leading-snug">{item.value}</p>
               </div>
             ))}
           </div>
@@ -201,7 +213,7 @@ export default function ProjectPage() {
       </section>
 
       {/* Section 7: Step Into a Premium Lifestyle (Naval Nagar Blue) */}
-      <section className="py-24 bg-[#2C2C6E] text-white">
+      <section className="py-24 bg-[#2C2C6E] text-white animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
           {/* Aerial Image Left */}
           <div className="w-full h-[500px] bg-white/5 rounded-sm border border-white/10 flex items-center justify-center relative overflow-hidden">
@@ -209,7 +221,7 @@ export default function ProjectPage() {
               src="/asset/img/img 4.jpg"
               alt="Naval Nagar Aerial View"
               fill
-              className="object-cover"
+              className="object-cover hover-zoom-img"
             />
           </div>
 
@@ -229,7 +241,7 @@ export default function ProjectPage() {
       </section>
 
       {/* Section 8: Strategic Location (Naval Nagar White) */}
-      <section className="py-24 bg-white text-gray-900">
+      <section className="py-24 bg-white text-gray-900 animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-start">
           <div className="pt-8">
             <h2 className="text-3xl font-bold text-gray-800 mb-12">Strategic Location, Unmatched Connectivity</h2>
@@ -257,14 +269,14 @@ export default function ProjectPage() {
               src="/asset/img/img 5.jpg"
               alt="Naval Nagar Location Map"
               fill
-              className="object-cover"
+              className="object-cover hover-zoom-img"
             />
           </div>
         </div>
       </section>
 
       {/* Section 9: Why Choose Naval Nagar? */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-normal text-center mb-12 text-[#071C1F]">
             Why Choose Naval Nagar?
@@ -275,26 +287,28 @@ export default function ProjectPage() {
               {
                 title: "Exclusive Pricing:",
                 desc: "₹ 1 Lakhs per Cent, offering excellent value for a premium lifestyle.",
-                icon: "💰"
+                icon: "/asset/icon/ic 6.png"
               },
               {
                 title: "All-Inclusive Amenities:",
                 desc: "Gated community, solar street lights, 30ft/23ft tar roads, and stormwater drainage - everything you need for comfort.",
-                icon: "🏛️"
+                icon: "/asset/icon/ic 8.png"
               },
               {
                 title: "Exclusivity:",
                 desc: "Only 20 plots available, offering privacy and a sense of community",
-                icon: "💎"
+                icon: "/asset/icon/ic 7.png"
               },
               {
                 title: "High Potential for Growth:",
                 desc: "With easy access to major highways and ongoing industrial growth in the region, expect steady appreciation.",
-                icon: "📈"
+                icon: "/asset/icon/ic 9.png"
               }
             ].map((feature, idx) => (
-              <div key={idx} className="w-[280px] h-[280px] bg-white border border-[#FF5A3C]/10 flex flex-col items-center justify-center p-6 text-center hover:shadow-lg transition-shadow">
-                <div className="w-[52px] h-[52px] mb-6 text-4xl flex items-center justify-center text-[#FF5A3C]">{feature.icon}</div>
+              <div key={idx} className="w-[280px] h-[280px] bg-white border border-[#FF5A3C]/10 flex flex-col items-center justify-center p-6 text-center hover:shadow-lg transition-shadow hover-card">
+                <div className="w-[52px] h-[52px] mb-6 flex items-center justify-center relative">
+                  <Image src={feature.icon} alt={feature.title} width={40} height={40} className="object-contain" />
+                </div>
                 <h3 className="text-[20px] leading-[30px] font-semibold text-[#FF5A3C] mb-2">{feature.title}</h3>
                 <p className="text-[14px] leading-[24px] text-[#7B7B7B]">{feature.desc}</p>
               </div>
@@ -304,7 +318,7 @@ export default function ProjectPage() {
       </section>
 
       {/* Section 10: Sree Virutcham Nagar Highlights */}
-      <section id="sree-virutcham-nagar" className="py-20 bg-white scroll-mt-20">
+      <section id="sree-virutcham-nagar" className="py-20 bg-white scroll-mt-20 animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-16 text-blue-900">
             <span className="text-orange-600">Sree Virutcham Nagar</span> – Your Affordable Path to <br className="hidden md:block" /> Investment
@@ -312,18 +326,18 @@ export default function ProjectPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-start">
             {[
-              { label: "Location", value: "Pollachi to Aliyar Road, Near Rangasamudram, Pollachi, Tamil Nadu", icon: "📍" },
-              { label: "Starting Price", value: "₹ 6 Lakhs per Cent", icon: "💰" },
-              { label: "Land Area", value: "5 Acres", icon: "🗺️" },
-              { label: "Available Units", value: "98 Plots", icon: "📍" },
-              { label: "Development Stage", value: "Ready-to-Move", icon: "📈" },
+              { label: "Location", value: "Pollachi to Aliyar Road, Near Rangasamudram, Pollachi, Tamil Nadu", icon: "/asset/icon/ic 1.png" },
+              { label: "Starting Price", value: "₹ 6 Lakhs per Cent", icon: "/asset/icon/ic 2.png" },
+              { label: "Land Area", value: "5 Acres", icon: "/asset/icon/ic 3.png" },
+              { label: "Available Units", value: "98 Plots", icon: "/asset/icon/ic 4.png" },
+              { label: "Development Stage", value: "Ready-to-Move", icon: "/asset/icon/ic 5.png" },
             ].map((item, index) => (
-              <div key={index} className="flex flex-col items-center">
-                <div className="w-16 h-16 mb-4 text-3xl flex items-center justify-center text-orange-600">
-                  {item.icon}
+              <div key={index} className="flex flex-col items-center stagger-delay animate-on-scroll bg-white border border-[#FF5A3C]/10 p-6 rounded-lg text-center hover:shadow-lg transition-shadow hover-card h-full justify-center">
+                <div className="w-16 h-16 mb-4 flex items-center justify-center relative">
+                  <Image src={item.icon} alt={item.label} width={40} height={40} className="object-contain" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{item.label}</h3>
-                <p className="text-sm text-gray-500 max-w-[180px] leading-snug">{item.value}</p>
+                <p className="text-sm text-gray-500 leading-snug">{item.value}</p>
               </div>
             ))}
           </div>
@@ -331,7 +345,7 @@ export default function ProjectPage() {
       </section>
 
       {/* Section 11: Affordable Excellence (Sree Virutcham Blue) */}
-      <section className="py-24 bg-[#2C2C6E] text-white">
+      <section className="py-24 bg-[#2C2C6E] text-white animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
           {/* Aerial Image Left */}
           <div className="w-full h-[500px] bg-white/5 rounded-sm border border-white/10 flex items-center justify-center relative overflow-hidden">
@@ -339,7 +353,7 @@ export default function ProjectPage() {
               src="/asset/img/img 6.png"
               alt="Sree Virutcham Nagar Aerial View"
               fill
-              className="object-cover"
+              className="object-cover hover-zoom-img"
             />
           </div>
 
@@ -359,7 +373,7 @@ export default function ProjectPage() {
       </section>
 
       {/* Section 12: Strategic Location (Sree Virutcham White) */}
-      <section className="py-24 bg-white text-gray-900">
+      <section className="py-24 bg-white text-gray-900 animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-start">
           <div className="pt-8">
             <h2 className="text-3xl font-bold text-gray-800 mb-12">Strategic Location and Key Connectivity</h2>
@@ -387,14 +401,14 @@ export default function ProjectPage() {
               src="/asset/img/img 7.jpg"
               alt="Sree Virutcham Nagar Location Map"
               fill
-              className="object-cover"
+              className="object-cover hover-zoom-img"
             />
           </div>
         </div>
       </section>
 
       {/* Section 13: Why Sree Virutcham Nagar Stands Out */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white animate-on-scroll">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-normal text-center mb-12 text-[#071C1F]">
             Why Sree Virutcham Nagar Stands Out:
@@ -405,26 +419,28 @@ export default function ProjectPage() {
               {
                 title: "Incredible Value:",
                 desc: "Starting at ₹ 6 Lakhs per Cent, it's one of the most affordable options in the area",
-                icon: "💰"
+                icon: "/asset/icon/ic 10.png"
               },
               {
                 title: "Complete Amenities:",
                 desc: "Gated community, children's park, street lights, wide internal roads, and more",
-                icon: "🎡"
+                icon: "/asset/icon/ic 11.png"
               },
               {
                 title: "Invest in Peace of Mind:",
                 desc: "With DTCP and RERA approvals, your investment is safe and secure.",
-                icon: "🧠"
+                icon: "/asset/icon/ic 12.png"
               },
               {
                 title: "High Appreciation Potential:",
                 desc: "Enjoy a solid return with 8-10% annual appreciation in the rapidly growing Pollachi area.",
-                icon: "📈"
+                icon: "/asset/icon/ic 13.png"
               }
             ].map((feature, idx) => (
-              <div key={idx} className="w-[280px] h-[280px] bg-white border border-[#FF5A3C]/10 flex flex-col items-center justify-center p-6 text-center hover:shadow-lg transition-shadow">
-                <div className="w-[52px] h-[52px] mb-6 text-4xl flex items-center justify-center text-[#FF5A3C]">{feature.icon}</div>
+              <div key={idx} className="w-[280px] h-[280px] bg-white border border-[#FF5A3C]/10 flex flex-col items-center justify-center p-6 text-center hover:shadow-lg transition-shadow hover-card">
+                <div className="w-[52px] h-[52px] mb-6 flex items-center justify-center relative">
+                  <Image src={feature.icon} alt={feature.title} width={40} height={40} className="object-contain" />
+                </div>
                 <h3 className="text-[20px] leading-[30px] font-semibold text-[#FF5A3C] mb-2">{feature.title}</h3>
                 <p className="text-[14px] leading-[24px] text-[#7B7B7B]">{feature.desc}</p>
               </div>
@@ -434,63 +450,8 @@ export default function ProjectPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-brand text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 text-center md:text-left">
-          {/* Brand */}
-          <div className="space-y-4">
-            <h3 className="text-3xl font-bold italic">
-              VKV <br />Realty <span className="text-sm not-italic block mt-1">1985</span>
-            </h3>
-            {/* Social Icons Placeholder */}
-            <div className="flex gap-4 mt-6 justify-center md:justify-start">
-              {[1, 2, 3, 4].map(i => (
-                <div key={i} className="w-8 h-8 bg-white/20 rounded-full hover:bg-white/40 cursor-pointer"></div>
-              ))}
-            </div>
-          </div>
-
-          {/* Links Column */}
-          <div>
-            <h4 className="text-xl font-bold mb-6">Links</h4>
-            <ul className="space-y-4 text-orange-50">
-              <li><Link href="/home" className="hover:text-white cursor-pointer">Home</Link></li>
-              <li><Link href="/about" className="hover:text-white cursor-pointer">About</Link></li>
-              <li><Link href="/project" className="hover:text-white cursor-pointer">Project</Link></li>
-              <li><Link href="/contact" className="hover:text-white cursor-pointer">Contact</Link></li>
-            </ul>
-          </div>
-
-          {/* Project Column */}
-          <div>
-            <h4 className="text-xl font-bold mb-6">Project</h4>
-            <ul className="space-y-4 text-orange-50">
-              <li><Link href="#karun-garden" className="hover:text-white cursor-pointer">Karun Garden</Link></li>
-              <li><Link href="#naval-nagar" className="hover:text-white cursor-pointer">Naval Nagar</Link></li>
-              <li><Link href="#sree-virutcham-nagar" className="hover:text-white cursor-pointer">Sree Virutcham Nagar</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-xl font-bold mb-6">Contact Us</h4>
-            <div className="space-y-4 text-orange-50">
-              <p className="flex items-center gap-3 justify-center md:justify-start">
-                <span className="text-xl">📞</span> +91 73977 85966
-              </p>
-              <p className="flex items-center gap-3 justify-center md:justify-start">
-                <span className="text-xl">✉️</span> salescbe@triplesev.com
-              </p>
-              <p className="flex items-start gap-3 justify-center md:justify-start text-left">
-                <span className="text-xl mt-1">📍</span>
-                <span>No.149, Avinashi Road, Hopes College, Peelamedu post, CBE - 641 004</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-white/30 text-center text-orange-200 text-sm">
-          © {new Date().getFullYear()} VKV Realty. All rights reserved.
-        </div>
-      </footer>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
