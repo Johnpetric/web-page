@@ -1,4 +1,7 @@
+'use client'
+
 import Image from 'next/image'
+import { useSpring, animated } from '@react-spring/web'
 
 const coreValues = [
   {
@@ -72,11 +75,18 @@ const whyVkvFeatures = [
 ]
 
 export default function Aboutus() {
+  // Fade and slide animation from bottom to top
+  const heroAnimation = useSpring({
+    from: { opacity: 0, transform: 'translateY(50px)' },
+    to: { opacity: 1, transform: 'translateY(0px)' },
+    config: { mass: 1, tension: 80, friction: 26 },
+  })
+
   return (
     <div className="min-h-screen">
       {/* First Fold - Hero Section */}
-      <section className="bg-white py-16">
-        <div className="container mx-auto px-4">
+      <section className="bg-white py-16 overflow-hidden">
+        <animated.div style={heroAnimation} className="container mx-auto px-4">
           {/* Title */}
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-[#F15B26] mb-12 ">
             Welcome to VKV Realty - <span className="text-[#1E3A5F]">Building Dreams,</span>
@@ -139,7 +149,7 @@ export default function Aboutus() {
               </p>
             </div>
           </div>
-        </div>
+        </animated.div>
       </section>
 
       {/* Second Fold - Core Values */}
