@@ -59,6 +59,118 @@ body {
 .mobile-menu-enter { animation: slideIn 0.3s ease-out forwards; }
 .mobile-menu-overlay { animation: fadeIn 0.3s ease-out forwards; }
 
+/* Split Text Reveal Animation */
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes expandUnderline {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.split-text-container {
+  position: relative;
+  display: inline-block;
+}
+
+.split-text-left,
+.split-text-right {
+  opacity: 0;
+  display: inline-block;
+}
+
+.split-text-container.is-visible .split-text-left {
+  animation: slideFromLeft 0.6s ease-out forwards;
+}
+
+.split-text-container.is-visible .split-text-right {
+  animation: slideFromRight 0.6s ease-out 0.2s forwards;
+}
+
+.split-text-underline {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 80%;
+  height: 4px;
+  background: linear-gradient(90deg, #FF6347, #1E3A8A);
+  border-radius: 2px;
+}
+
+.split-text-container.is-visible .split-text-underline {
+  animation: expandUnderline 0.5s ease-out 0.5s forwards;
+}
+
+/* Icon Hover Animations */
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-8px); }
+  50% { transform: translateY(0); }
+  75% { transform: translateY(-4px); }
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes iconShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px) rotate(-2deg); }
+  40% { transform: translateX(4px) rotate(2deg); }
+  60% { transform: translateX(-4px) rotate(-2deg); }
+  80% { transform: translateX(4px) rotate(2deg); }
+}
+
+@keyframes iconSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes iconFlip {
+  0% { transform: perspective(400px) rotateY(0deg); }
+  100% { transform: perspective(400px) rotateY(360deg); }
+}
+
+.icon-bounce { transition: transform 0.3s ease; }
+.icon-bounce:hover { animation: iconBounce 0.6s ease; }
+
+.icon-pulse { transition: transform 0.3s ease; }
+.icon-pulse:hover { animation: iconPulse 0.5s ease infinite; }
+
+.icon-shake { transition: transform 0.3s ease; }
+.icon-shake:hover { animation: iconShake 0.5s ease; }
+
+.icon-spin { transition: transform 0.3s ease; }
+.icon-spin:hover { animation: iconSpin 0.6s ease-in-out; }
+
+.icon-flip { transition: transform 0.3s ease; }
+.icon-flip:hover { animation: iconFlip 0.6s ease; }
+
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   .animate-on-scroll {
@@ -68,6 +180,22 @@ body {
   }
   .mobile-menu-enter,
   .mobile-menu-overlay {
+    animation: none;
+  }
+  .split-text-left,
+  .split-text-right {
+    opacity: 1;
+    animation: none !important;
+  }
+  .split-text-underline {
+    transform: translateX(-50%) scaleX(1);
+    animation: none !important;
+  }
+  .icon-bounce:hover,
+  .icon-pulse:hover,
+  .icon-shake:hover,
+  .icon-spin:hover,
+  .icon-flip:hover {
     animation: none;
   }
 }

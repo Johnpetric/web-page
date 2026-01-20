@@ -244,7 +244,7 @@ export default function Home() {
                   alt="Prime Locations Icon"
                   width={80}
                   height={80}
-                  className="w-16 h-16 sm:w-20 sm:h-20"
+                  className="w-16 h-16 sm:w-20 sm:h-20 icon-bounce"
                 />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-[#FF6347] mb-2 sm:mb-3">
@@ -263,7 +263,7 @@ export default function Home() {
                   alt="Clear Titles Icon"
                   width={80}
                   height={80}
-                  className="w-16 h-16 sm:w-20 sm:h-20"
+                  className="w-16 h-16 sm:w-20 sm:h-20 icon-pulse"
                 />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-[#FF6347] mb-2 sm:mb-3">
@@ -282,7 +282,7 @@ export default function Home() {
                   alt="Infrastructure Icon"
                   width={80}
                   height={80}
-                  className="w-16 h-16 sm:w-20 sm:h-20"
+                  className="w-16 h-16 sm:w-20 sm:h-20 icon-shake"
                 />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-[#FF6347] mb-2 sm:mb-3">
@@ -304,7 +304,7 @@ export default function Home() {
                   alt="Government Approved Icon"
                   width={80}
                   height={80}
-                  className="w-16 h-16 sm:w-20 sm:h-20"
+                  className="w-16 h-16 sm:w-20 sm:h-20 icon-spin"
                 />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-[#FF6347] mb-2 sm:mb-3">
@@ -323,7 +323,7 @@ export default function Home() {
                   alt="Service Icon"
                   width={80}
                   height={80}
-                  className="w-16 h-16 sm:w-20 sm:h-20"
+                  className="w-16 h-16 sm:w-20 sm:h-20 icon-flip"
                 />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-[#FF6347] mb-2 sm:mb-3">
@@ -340,9 +340,12 @@ export default function Home() {
       {/* What We Offer Section (Third Fold) */}
       <section className="py-10 sm:py-12 md:py-16">
         <div className="container mx-auto px-3 sm:px-4">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12 animate-on-scroll">
-            <span className="text-[#FF6347]">What</span>
-            <span className="text-[#1E3A8A]"> We Offer</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 sm:mb-12">
+            <span className="split-text-container animate-on-scroll">
+              <span className="split-text-left text-[#FF6347]">What</span>
+              <span className=" text-[#1E3A8A]"> We Offer</span>
+             
+            </span>
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -354,7 +357,7 @@ export default function Home() {
                   alt="Plotted Developments Icon"
                   width={60}
                   height={60}
-                  className="w-12 h-12 sm:w-[60px] sm:h-[60px]"
+                  className="w-12 h-12 sm:w-[60px] sm:h-[60px] w-16 h-16 sm:w-20 sm:h-20 icon-spin"
                 />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-[#FF6347] mb-4 sm:mb-8">
@@ -373,7 +376,7 @@ export default function Home() {
                   alt="Investment Consulting Icon"
                   width={60}
                   height={60}
-                  className="w-12 h-12 sm:w-[60px] sm:h-[60px]"
+                  className="w-12 h-12 sm:w-[60px] sm:h-[60px] w-16 h-16 sm:w-20 sm:h-20 icon-flip"
                 />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-[#FF6347] mb-4 sm:mb-8">
@@ -392,7 +395,7 @@ export default function Home() {
                   alt="Site Selection Icon"
                   width={60}
                   height={60}
-                  className="w-12 h-12 sm:w-[60px] sm:h-[60px]"
+                  className="w-12 h-12 sm:w-[60px] sm:h-[60px] w-16 h-16 sm:w-20 sm:h-20 icon-shake"
                 />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-[#FF6347] mb-4 sm:mb-8">
@@ -411,7 +414,7 @@ export default function Home() {
                   alt="End-to-End Assistance Icon"
                   width={60}
                   height={60}
-                  className="w-12 h-12 sm:w-[60px] sm:h-[60px]"
+                  className="w-12 h-12 sm:w-[60px] sm:h-[60px] w-16 h-16 sm:w-20 sm:h-20 icon-pulse"
                 />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-[#FF6347] mb-4 sm:mb-8">
