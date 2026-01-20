@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useSpring, animated } from '@react-spring/web'
+import { useSpring, animated, useInView } from '@react-spring/web'
 
 const coreValues = [
   {
@@ -74,8 +74,74 @@ const whyVkvFeatures = [
   },
 ]
 
+// Animated section component for scroll-triggered animations
+function AnimatedSection({
+  children,
+  className = '',
+  direction = 'up'
+}: {
+  children: React.ReactNode
+  className?: string
+  direction?: 'up' | 'left' | 'right'
+}) {
+  const [ref, inView] = useInView({
+    once: true,
+    rootMargin: '-10% 0px',
+  })
+
+  const getTransform = () => {
+    switch (direction) {
+      case 'left':
+        return inView ? 'translateX(0px)' : 'translateX(-50px)'
+      case 'right':
+        return inView ? 'translateX(0px)' : 'translateX(50px)'
+      default:
+        return inView ? 'translateY(0px)' : 'translateY(50px)'
+    }
+  }
+
+  const styles = useSpring({
+    opacity: inView ? 1 : 0,
+    transform: getTransform(),
+    config: { mass: 1, tension: 80, friction: 26 },
+  })
+
+  return (
+    <animated.div ref={ref} style={styles} className={className}>
+      {children}
+    </animated.div>
+  )
+}
+
+// Animated card wrapper for individual cards with staggered effect
+function AnimatedCard({
+  children,
+  delay = 0
+}: {
+  children: React.ReactNode
+  delay?: number
+}) {
+  const [ref, inView] = useInView({
+    once: true,
+    rootMargin: '-5% 0px',
+  })
+
+  const style = useSpring({
+    opacity: inView ? 1 : 0,
+    transform: inView ? 'translateY(0px) scale(1)' : 'translateY(30px) scale(0.95)',
+    delay: inView ? delay : 0,
+    config: { mass: 1, tension: 120, friction: 20 },
+  })
+
+  return (
+    <animated.div ref={ref} style={style}>
+      {children}
+    </animated.div>
+  )
+}
+
 export default function Aboutus() {
-  // Fade and slide animation from bottom to top
+  // Hero animation - fade and slide from bottom to top
   const heroAnimation = useSpring({
     from: { opacity: 0, transform: 'translateY(50px)' },
     to: { opacity: 1, transform: 'translateY(0px)' },
@@ -106,6 +172,7 @@ export default function Aboutus() {
                     width={48}
                     height={48}
                     className="w-full h-full object-cover"
+                    style={{ width: 'auto', height: 'auto' }}
                   />
                 </div>
                 <h2 className="text-xl font-bold text-[#1E3A5F]">Our Vision</h2>
@@ -124,7 +191,9 @@ export default function Aboutus() {
                     alt="VKV Realty Building"
                     width={400}
                     height={500}
+                    priority
                     className="object-cover"
+                    style={{ width: 'auto', height: 'auto' }}
                   />
                 </div>
               </div>
@@ -140,6 +209,7 @@ export default function Aboutus() {
                     width={48}
                     height={48}
                     className="w-full h-full object-cover"
+                    style={{ width: 'auto', height: 'auto' }}
                   />
                 </div>
                 <h2 className="text-xl font-bold text-[#1E3A5F]">Our Mission</h2>
@@ -153,132 +223,143 @@ export default function Aboutus() {
       </section>
 
       {/* Second Fold - Core Values */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-16 overflow-hidden">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1E3A5F] mb-12">
-            Core Values That Drive Us
-          </h2>
+          <AnimatedSection>
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1E3A5F] mb-12">
+              Core Values That Drive Us
+            </h2>
+          </AnimatedSection>
 
           {/* Top Row - 4 cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             {coreValues.slice(0, 4).map((value, index) => (
-              <div
-                key={index}
-                className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow"
-              >
-                <div className="flex justify-center mb-4">
-                  <Image
-                    src={value.icon}
-                    alt={value.title}
-                    width={64}
-                    height={64}
-                    className="object-contain"
-                  />
+              <AnimatedCard key={index} delay={index * 100}>
+                <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow h-full">
+                  <div className="flex justify-center mb-4">
+                    <Image
+                      src={value.icon}
+                      alt={value.title}
+                      width={64}
+                      height={64}
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#1E3A5F] mb-2">{value.title}</h3>
+                  <p className="text-gray-600 text-sm">{value.description}</p>
                 </div>
-                <h3 className="text-lg font-bold text-[#1E3A5F] mb-2">{value.title}</h3>
-                <p className="text-gray-600 text-sm">{value.description}</p>
-              </div>
+              </AnimatedCard>
             ))}
           </div>
 
           {/* Bottom Row - 3 cards centered */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {coreValues.slice(4).map((value, index) => (
-              <div
-                key={index + 4}
-                className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow"
-              >
-                <div className="flex justify-center mb-4">
-                  <Image
-                    src={value.icon}
-                    alt={value.title}
-                    width={64}
-                    height={64}
-                    className="object-contain"
-                  />
+              <AnimatedCard key={index} delay={index * 100}>
+                <div className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow h-full">
+                  <div className="flex justify-center mb-4">
+                    <Image
+                      src={value.icon}
+                      alt={value.title}
+                      width={64}
+                      height={64}
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#1E3A5F] mb-2">{value.title}</h3>
+                  <p className="text-gray-600 text-sm">{value.description}</p>
                 </div>
-                <h3 className="text-lg font-bold text-[#1E3A5F] mb-2">{value.title}</h3>
-                <p className="text-gray-600 text-sm">{value.description}</p>
-              </div>
+              </AnimatedCard>
             ))}
           </div>
         </div>
       </section>
 
       {/* Third Fold - Our Journey */}
-      <section className="bg-[#2D2A5A] py-16">
+      <section className="bg-[#2D2A5A] py-16 overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Our Journey - Crafting a Legacy
-            </h2>
-            <p className="text-gray-300 text-lg">
-              Since 1985, VKV Realty has been shaping Coimbatore&apos;s skyline, one landmark at a time.
-            </p>
-          </div>
+          <AnimatedSection>
+            <div className="mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Our Journey - Crafting a Legacy
+              </h2>
+              <p className="text-gray-300 text-lg">
+                Since 1985, VKV Realty has been shaping Coimbatore&apos;s skyline, one landmark at a time.
+              </p>
+            </div>
+          </AnimatedSection>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image */}
-            <div className="flex justify-center">
-              <div className="relative">
-                <Image
-                  src="/images/About us page/ff about page images/second fold image.png"
-                  alt="Coimbatore Cityscape"
-                  width={500}
-                  height={400}
-                  className="rounded-lg object-cover"
-                />
+            <AnimatedSection direction="left">
+              <div className="flex justify-center">
+                <div className="relative">
+                  <Image
+                    src="/images/About us page/ff about page images/second fold image.png"
+                    alt="Coimbatore Cityscape"
+                    width={500}
+                    height={400}
+                    className="rounded-lg object-cover"
+                    style={{ width: 'auto', height: 'auto' }}
+                  />
+                </div>
               </div>
-            </div>
+            </AnimatedSection>
 
             {/* Text Content */}
-            <div className="text-white">
-              <p className="text-gray-300 leading-relaxed mb-6">
-                With over 30 successful projects, we&apos;ve built more than just plots—we&apos;ve built communities, trust, and futures. Our journey has been fueled by a passion for excellence and a commitment to customer satisfaction.
-              </p>
-              <p className="text-gray-300 leading-relaxed">
-                Today, we continue to build on that legacy, delivering premium living spaces and investment opportunities that stand the test of time.
-              </p>
-            </div>
+            <AnimatedSection direction="right">
+              <div className="text-white">
+                <p className="text-gray-300 leading-relaxed mb-6">
+                  With over 30 successful projects, we&apos;ve built more than just plots—we&apos;ve built communities, trust, and futures. Our journey has been fueled by a passion for excellence and a commitment to customer satisfaction.
+                </p>
+                <p className="text-gray-300 leading-relaxed">
+                  Today, we continue to build on that legacy, delivering premium living spaces and investment opportunities that stand the test of time.
+                </p>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
       {/* Fourth Fold - Why VKV Realty */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-16 overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              <span className="text-[#F15B26]">Why</span>{' '}
-              <span className="text-[#1E3A5F]">VKV Realty?</span>
-            </h2>
-            <p className="text-gray-600 text-lg">Here&apos;s What Sets Us Apart:</p>
-          </div>
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                <span className="text-[#F15B26]">Why</span>{' '}
+                <span className="text-[#1E3A5F]">VKV Realty?</span>
+              </h2>
+              <p className="text-gray-600 text-lg">Here&apos;s What Sets Us Apart:</p>
+            </div>
+          </AnimatedSection>
 
           <div className="max-w-4xl mx-auto">
             {whyVkvFeatures.map((feature, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-6 py-6 border-b border-gray-200 last:border-b-0"
-              >
-                <div className="flex-shrink-0">
-                  <Image
-                    src={feature.icon}
-                    alt={feature.title}
-                    width={48}
-                    height={48}
-                    className="object-contain"
-                  />
-                </div>
-                <div className="flex-1">
-                  <div className="flex flex-col md:flex-row md:items-center md:gap-8">
-                    <h3 className="text-lg font-bold text-[#1E3A5F] min-w-[200px]">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600">{feature.description}</p>
+              <AnimatedCard key={index} delay={index * 100}>
+                <div className="flex items-start gap-6 py-6 border-b border-gray-200 last:border-b-0">
+                  <div className="flex-shrink-0">
+                    <Image
+                      src={feature.icon}
+                      alt={feature.title}
+                      width={48}
+                      height={48}
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto' }}
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex flex-col md:flex-row md:items-center md:gap-8">
+                      <h3 className="text-lg font-bold text-[#1E3A5F] min-w-[200px]">
+                        {feature.title}
+                      </h3>
+                      <p className="text-gray-600">{feature.description}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </AnimatedCard>
             ))}
           </div>
         </div>
